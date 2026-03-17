@@ -7,6 +7,7 @@ document.getElementById("user").addEventListener("keydown", function (event) {
 async function getUser() {
     document.getElementById("profile-card").style.display="none";//To clear previous result
   document.getElementById("output").textContent = ""; //To clear the previous error message
+  document.getElementById("repoList").innerHTML ="";
   const user = document.getElementById("user").value.trim();
   if (!user) {
     document.getElementById("output").textContent = "Please enter a Username";
@@ -14,14 +15,14 @@ async function getUser() {
   }
   try {
     const url = `https://api.github.com/users/${user}`;
-    const userfetch = await fetch(url).then(document.getElementById("output").textContent="Loading....");
-    const reposfetch=await fetch(`${url}/repos`);//return repos by user
-    if (!userfetch.ok) {
+    document.getElementById("output").textContent="Loading....";
+    const [userRes,repoRes] = await Promise.all([fetch(url),fetch(`${url}/repos`)]);//return repos by user
+    if (!userRes.ok) {
       throw new Error("User not found");
     }
     document.getElementById("profile-card").style.display="flex";//Get all elements with className and change value
     //Main profile part
-    const data = await userfetch.json().then(document.getElementById("output").textContent="");
+    const data = await userRes.json().then(document.getElementById("output").textContent="");
     document.getElementById("profilepic").src = data.avatar_url;
     document.getElementById("name").textContent =
       `Name:${data.name || "No Name available"}`;
@@ -35,7 +36,7 @@ async function getUser() {
       `Public Repos:${data.public_repos}`;
 
     //Profile repo part
-    const repodata=await reposfetch.json();
+    const repodata=await repoRes.json();
     repodata.forEach(repo => {
         if (repo.stargazers_count<=10) {
             const item=document.createElement("p");
