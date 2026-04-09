@@ -13,9 +13,16 @@
         <h2>Weather App</h2>
         <div class="search-row">
             <input type="text" id="city" placeholder="Type City">
-            <button onclick="getWeather()">Search</button>
+            <button type="button" id="search-btn" onclick="getWeather()">Search</button>
         </div>
-        <pre id="output"></pre>
+        <div class="weather-display" id="weather-display">
+            <div id="weather-emoji" class="weather-emoji" role="img" aria-label=""></div>
+            <div id="loading" class="loading" hidden aria-live="polite" aria-busy="false">
+                <span class="loading-spinner" aria-hidden="true"></span>
+                <span class="loading-text">Loading weather…</span>
+            </div>
+            <pre id="output" class="weather-text"></pre>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

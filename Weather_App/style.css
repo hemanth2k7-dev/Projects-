@@ -86,19 +86,103 @@ button:active {
     background: linear-gradient(135deg, #5a6fd6 0%, #653a8e 100%);
 }
 
-#output {
+button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+button:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.weather-display {
     min-height: 100px;
     padding: 1.25rem;
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.weather-emoji {
+    font-size: 4.5rem;
+    line-height: 1;
+    text-align: center;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+    user-select: none;
+}
+
+.weather-emoji:empty {
+    display: none;
+}
+
+.weather-text {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
     font-size: 1rem;
     line-height: 1.8;
     color: #334155;
+    font-family: inherit;
     white-space: pre-wrap;
     word-wrap: break-word;
+    text-align: center;
 }
 
-#output:empty::before {
+.weather-display:has(.weather-text:empty)::before {
     content: 'Enter a city and click Search';
     color: #94a3b8;
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.weather-display.is-loading:has(.weather-text:empty)::before {
+    content: none;
+}
+
+.weather-display:has(.weather-text:empty) .weather-text {
+    display: none;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.875rem;
+    padding: 0.5rem 0 0.25rem;
+}
+
+.loading[hidden] {
+    display: none !important;
+}
+
+.loading-spinner {
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 3px solid #e2e8f0;
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: loading-spin 0.65s linear infinite;
+}
+
+@keyframes loading-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #64748b;
+    letter-spacing: 0.02em;
 }
