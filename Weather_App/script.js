@@ -1,5 +1,5 @@
 // Put your API key here
-const API_KEY = ;
+const API_KEY = '';
 
 const emojiEl = document.getElementById('weather-emoji');
 const outputEl = document.getElementById('output');
