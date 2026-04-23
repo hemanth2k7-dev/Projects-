@@ -16,12 +16,20 @@
             <button type="button" id="search-btn" onclick="getWeather()">Search</button>
         </div>
         <div class="weather-display" id="weather-display">
-            <div id="weather-emoji" class="weather-emoji" role="img" aria-label=""></div>
             <div id="loading" class="loading" hidden aria-live="polite" aria-busy="false">
                 <span class="loading-spinner" aria-hidden="true"></span>
                 <span class="loading-text">Loading weather…</span>
             </div>
-            <pre id="output" class="weather-text"></pre>
+            <div id="weather-content" class="weather-content" hidden>
+                <div class="weather-main-box">
+                    <div id="weather-emoji" class="weather-emoji" role="img" aria-label=""></div>
+                    <div id="main-output" class="weather-main-text"></div>
+                </div>
+                <div class="weather-details-box">
+                    <div id="details-output" class="weather-details-text"></div>
+                </div>
+            </div>
+            <pre id="output" class="weather-text" hidden></pre>
         </div>
     </div>
     <script src="script.js"></script>
