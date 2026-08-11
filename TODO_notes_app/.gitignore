@@ -1,0 +1,4 @@
+# Local-only notes for full stack learning
+/local-notes/
+node_modules/
+.env
