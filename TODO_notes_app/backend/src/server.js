@@ -5,7 +5,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
-app.use("/api/notes", notesRoutes);
+app.use(express.json());//Middleware to parse incoming JSON requests
+app.use("/api/notes", notesRoutes);//Middleware to handle requests to /api/notes and route them to the notesRoutes
 connectDB();
 
 const PORT = process.env.PORT || 3000;
